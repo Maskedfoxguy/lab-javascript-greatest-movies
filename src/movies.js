@@ -50,21 +50,57 @@ function scoresAverage(moviesArray) {
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
 function dramaMoviesScore(moviesArray) {
-   let dramaScore =  moviesArray.filter((dramaList) => dramaList.genre.includes('drama'))
-   return moviesArray.reduce(dramaList.score, currentValue);
+   let filmDrama = moviesArray.filter(dramaFilms => {
+    return dramaFilms.genre.includes("Drama") 
+   });
 
-
+   
+   
+   let scoreDrama = filmDrama.reduce((accumulator, dramaScore) => {
+     if (dramaScore.score === undefined) {
+      return accumulator;
+     } 
+     else {
+      return accumulator + dramaScore.score;
+     }
+   }, 0);
+     
+       let avarageOfDramaFilms = scoreDrama / filmDrama.length;
+       return Math.round(avarageOfDramaFilms * 100) / 100;
 }
+    
+ 
+//1.  Go through the array which and find the drama movies (filter and includes)
+//2.  Calculate the total score of the drama moves ()
+//3.  Calculate the avarage score. 
 
 
 
 
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-function orderByYear(moviesArray) {}
-
+function orderByYear(moviesArray) {
+  releaseYear = moviesArray.filter(date => date.year > 0); 
+  
+  releaseOrder = releaseYear.sort((a, b) => {
+   
+    if (a.year !== b.year) return a.year - b.year;
+    return a.title.localeCompare(b.title);
+});
+     
+  return releaseOrder; 
+   
+}
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically(moviesArray) {}
+function orderAlphabetically(moviesArray) {
+ let onlyTitle = moviesArray.slice(0, 21).map(titleFilm => {
+  return titleFilm.title;
+ });
+ 
+  let titlesAlphabetical = onlyTitle.sort((a, b ) => a.title.localeCompare(b.title));
+  return titlesAlphabetical;
+}
+
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes(moviesArray) {}
