@@ -2,38 +2,63 @@
 // _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors.
 // How could you "clean" a bit this array and make it unified (without duplicates)?
 function getAllDirectors(moviesArray) {
-const directors = movies.map((movie) => {
+const directors = moviesArray.map((movie) => {
   return movie.director }) 
   return directors
 }
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
 function howManyMovies(moviesArray) {
-  const SpielbergDrama = movies.filter(function(Dramas) {
-    return Dramas.director == "Steven Spielberg" && Dramas.genre == "Drama"
-
-  }); 
-    return SpielbergDrama.length;
+  const SpielbergDrama = moviesArray.filter(function(Movie) {
+    return Movie.director == "Steven Spielberg" && Movie.genre.includes("Drama")
+   
+   }); 
+   console.log(SpielbergDrama);
+     return SpielbergDrama.length;
 }
-
 
 // 1. Reach the movies database - done
 // 2. Find the filter the dramas(movies.genre === "drama") and the director (movies.director === Spielb) -- done
 // 3 Get a the result in a number. - done
+
+
+
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 function scoresAverage(moviesArray) {
   if (moviesArray.length === 0) {
     return 0;
   }
+// if the array is empty it will give back 0
+  let movieTotalscore = moviesArray.reduce((acc, moviescore) => {
+   if (moviescore.score === undefined) {
+    return acc;
+    // should return average even if one of the movies does not have score
+   }
+   else {
+    return acc + moviescore.score
+   }
+   // with this the sum of scores will be calculated
+  }, 0);
+
+  let avarageOfMovieScores = movieTotalscore / moviesArray.length
+  // avarage of the scores
+  return Math.round(avarageOfMovieScores * 100) / 100;
+  // rounding to 2 decimals. 
+}; 
+
+
+// Iteration 4: Drama movies - Get the average of Drama Movies
+function dramaMoviesScore(moviesArray) {
+   let dramaScore =  moviesArray.filter((dramaList) => dramaList.genre.includes('drama'))
+   return moviesArray.reduce(dramaList.score, currentValue);
+
 
 }
 
 
 
 
-// Iteration 4: Drama movies - Get the average of Drama Movies
-function dramaMoviesScore(moviesArray) {}
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear(moviesArray) {}
